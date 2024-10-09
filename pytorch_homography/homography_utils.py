@@ -1,5 +1,5 @@
 import torch
-import math
+
 
 def _matrix_reduction_step(matrix: torch.tensor):
     b, h, w = matrix.shape
@@ -59,8 +59,14 @@ def multi_matrix_reslover(matrix: torch.tensor):
 
 
 def get_homography(x, y):
-    b, _, _ = x.shape  
-    device = x.device  # matrix.shape = b, 2, h, w
+    # x.shape = b, 4, 2
+    # y.shape = b, 4, 2
+    device = x.device
+    b, _, _ = x.shape
+    # sel-dim=epochs,4,3
+    x = torch.cat((x, torch.ones(b, 4, 1, device=device)), dim=-1)
+    y = torch.cat((y, torch.ones(b, 4, 1, device=device)), dim=-1)
+    # matrix.shape = b, 2, h, w
     matrix = torch.zeros(b, 2, 4, 6, device=device)
     # 6/w, b, 4/h -> b, h, w -> b, 2, h, w
     matrix[:,0] = torch.stack([x[:,:,0],x[:,:,1],x[:,:,2],
