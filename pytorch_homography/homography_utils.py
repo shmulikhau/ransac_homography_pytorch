@@ -59,6 +59,9 @@ def multi_matrix_reslover(matrix: torch.tensor):
 
 
 def get_homography(x, y):
+    """
+    get homography from sets of 4 key-points
+    """
     # x.shape = b, 4, 2
     # y.shape = b, 4, 2
     device = x.device
@@ -85,17 +88,20 @@ def get_homography(x, y):
 
 
 def distance_vectors(homographies, x, y):
-  device = x.device
-  # x,y -> n,2 -> n,3 -> 3,n
-  x = torch.cat((x, torch.ones(*x.shape[:-1], 1, device=device)), dim=-1).to(device).transpose(1,0)
-  y = torch.cat((y, torch.ones(*y.shape[:-1], 1, device=device)), dim=-1).to(device).transpose(1,0)
-  # shape=epochs,3,n
-  estimates = homographies @ x
-  # 3,epochs,n
-  estimates = estimates.permute(1,0,2)
-  estimates /= estimates[2,:,:]
-  estimates[estimates!=estimates] = 0.
-  # epochs,n,3
-  estimates = estimates.permute(1,2,0)
-  axis_distance = estimates - y.transpose(1,0)
-  return torch.norm(axis_distance, dim=-1)
+    """
+    return the distance between estimates of y by x and homographies to real y
+    """
+    device = x.device
+    # x,y -> n,2 -> n,3 -> 3,n
+    x = torch.cat((x, torch.ones(*x.shape[:-1], 1, device=device)), dim=-1).to(device).transpose(1,0)
+    y = torch.cat((y, torch.ones(*y.shape[:-1], 1, device=device)), dim=-1).to(device).transpose(1,0)
+    # shape=epochs,3,n
+    estimates = homographies @ x
+    # 3,epochs,n
+    estimates = estimates.permute(1,0,2)
+    estimates /= estimates[2,:,:]
+    estimates[estimates!=estimates] = 0.
+    # epochs,n,3
+    estimates = estimates.permute(1,2,0)
+    axis_distance = estimates - y.transpose(1,0)
+    return torch.norm(axis_distance, dim=-1)

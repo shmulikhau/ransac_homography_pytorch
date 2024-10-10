@@ -4,6 +4,9 @@ from pytorch_homography.homography_utils import get_homography, distance_vectors
 
 
 class Ransac(nn.Module):
+    """
+    Ransac (Random sample consensus) algorithm implemention on torch
+    """
 
     def __init__(self, iterations, len_sample, model, criterion, threshold=5):
         super(Ransac, self).__init__()
@@ -14,6 +17,16 @@ class Ransac(nn.Module):
         self.loss_threshold = threshold
 
     def forward(self, x, y):
+        """
+        forward function
+
+        Parameters:
+        x (torch.tensor): tensor of a set as size of b,n
+        y (torch.tensor): tensor of b set as size of b,n
+
+        Rertuns:
+        ransac result, how mutch data was corresponding
+        """
         device = x.device
         selections = torch.rand(self.iterations, self.len_sample, device=device)
         selections = selections * (len(x) - 1e-8)
