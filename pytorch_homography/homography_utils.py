@@ -60,7 +60,7 @@ def multi_matrix_reslover(matrix: torch.tensor):
 
 def get_homography(x, y):
     """
-    get homography from sets of 4 key-points
+    get homography from sets of 4 key-points.
     """
     # x.shape = b, 4, 2
     # y.shape = b, 4, 2
