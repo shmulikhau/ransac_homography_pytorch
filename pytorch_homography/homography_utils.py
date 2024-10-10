@@ -82,3 +82,20 @@ def get_homography(x, y):
                      mat_result[:,1,:3],
                      torch.cat((mat_result[:,0,3:], torch.ones(b,1, device=device)), dim=-1)]).permute(1, 0, 2)
     return h
+
+
+def distance_vectors(homographies, x, y):
+  device = x.device
+  # x,y -> n,2 -> n,3 -> 3,n
+  x = torch.cat((x, torch.ones(*x.shape[:-1], 1, device=device)), dim=-1).to(device).transpose(1,0)
+  y = torch.cat((y, torch.ones(*y.shape[:-1], 1, device=device)), dim=-1).to(device).transpose(1,0)
+  # shape=epochs,3,n
+  estimates = homographies @ x
+  # 3,epochs,n
+  estimates = estimates.permute(1,0,2)
+  estimates /= estimates[2,:,:]
+  estimates[estimates!=estimates] = 0.
+  # epochs,n,3
+  estimates = estimates.permute(1,2,0)
+  axis_distance = estimates - y.transpose(1,0)
+  return torch.norm(axis_distance, dim=-1)

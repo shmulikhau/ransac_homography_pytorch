@@ -1,10 +1,12 @@
 import torch
 from torch import nn
+from pytorch_homography.homography_utils import get_homography, distance_vectors
 
 
 class Ransac(nn.Module):
 
     def __init__(self, iterations, len_sample, model, criterion, threshold=5):
+        super(Ransac, self).__init__()
         self.iterations = iterations
         self.len_sample = len_sample
         self.model = model
@@ -24,3 +26,7 @@ class Ransac(nn.Module):
         lose_arr = (lose_arr < self.loss_threshold).sum(dim=-1)
         #lose_arr = -lose_arr.sum(dim=-1)
         return all_models[torch.argmax(lose_arr)], torch.max(lose_arr)
+
+
+def build_ransac_find_homography_model(iterations=10000, threshold=6):
+    return Ransac(iterations, 4, get_homography, distance_vectors, threshold=threshold)
