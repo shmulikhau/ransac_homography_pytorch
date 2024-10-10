@@ -9,6 +9,14 @@ class Ransac(nn.Module):
     """
 
     def __init__(self, iterations, len_sample, model, criterion, threshold=5):
+        """
+        Parameters:
+        iterations (int): number of random iterations to find the best result.
+        len_sample (int): number of elements to sample in every iteration.
+        model: function to convert a sample into result hypothesis.
+        criterion: function to set loss value to every element by the result hypothesis.
+        threshold (float): maximum loss value to every element, more than the maximum the element will be ignored.
+        """
         super(Ransac, self).__init__()
         self.iterations = iterations
         self.len_sample = len_sample
