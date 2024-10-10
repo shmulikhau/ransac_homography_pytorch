@@ -22,7 +22,7 @@ from matplotlib import pyplot as plt
 transformed = cv.warpPerspective(img1, H.numpy(), (h, w))
 plt.imshow(transformed, 'gray'),plt.show()
 ```
-#### for full using example you can read the `demo.ipynb` notebook.
+#### for full example you can read the `demo.ipynb` notebook.
 ## On the implementation
 - To find the homography, the program selected random 4 sets of key-points, make homography, check the loss between all key-points, and select the best homography.
 
