@@ -1,7 +1,7 @@
-# ransak_homography_pytorch
-Implementation of cv2.find_homography by Ransac (Random sample consensus) function on pytorch for gpu support. 
-###### on the algorithm:
-https://en.wikipedia.org/wiki/Random_sample_consensus
+# ransac_homography_pytorch
+Implementation of cv2.find_homography by Ransac (RANdom SAmple Consensus) function on pytorch for gpu support. 
+###### on the algorithm: [RANSAC](https://en.wikipedia.org/wiki/Random_sample_consensus)
+
 ## How to run
 Take the too sets of matching points that every element in first set corresponding to same element in the second set,
 the sets need to be in shape of ```[batch_size],[xy|2]```.
@@ -22,7 +22,7 @@ from matplotlib import pyplot as plt
 transformed = cv.warpPerspective(img1, H.numpy(), (h, w))
 plt.imshow(transformed, 'gray'),plt.show()
 ```
-#### for full example you can read the `demo.ipynb` notebook.
+#### for full example you can read and use the [demo.ipynb](/demo.ipynb) notebook.
 ## On the implementation
 - To find the homography, the program selected random 4 sets of key-points, make homography, check the loss between all key-points, and select the best homography.
 
