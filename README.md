@@ -26,7 +26,7 @@ plt.imshow(transformed, 'gray'),plt.show()
 ## Times on tesla-t4 ours implemention vs cv2.find_homography
 | cv2.find_homography    | ours |
 | -------- | ------- |
-| 0.00531s  | **0.00350**    |
+| 0.00531s  | **0.00350s**    |
 ## On the implementation
 - To find the homography, the program selected random 4 sets of key-points, make homography, check the loss between all key-points, and select the best homography.
 
