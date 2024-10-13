@@ -1,5 +1,5 @@
 # ransac_homography_pytorch
-Implementation of cv2.find_homography by Ransac (RANdom SAmple Consensus) function on pytorch for gpu support. 
+Implementation of cv2.find_homography by RANSAC (RANdom SAmple Consensus) function on pytorch for gpu support. 
 ###### on the algorithm: [RANSAC](https://en.wikipedia.org/wiki/Random_sample_consensus)
 
 ## How to run
