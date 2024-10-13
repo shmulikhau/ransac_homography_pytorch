@@ -9,8 +9,8 @@ the sets need to be in shape of ```[batch_size],[xy|2]```.
 #### How to use:
 ```python
 from pytorch_homography import find_homography
-# kpt1 - first set of key-points
-# kpt2 - second set of key-points
+# kpt1 - first set of key-points in shape of N,2
+# kpt2 - second set of key-points in shape of N,2
 H = find_homography(kpt1, kpt2)
 H.shape
 # output:
