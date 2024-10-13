@@ -19,15 +19,17 @@ H.shape
 #### Now you can use the homography to draw the picture:
 ```python
 from matplotlib import pyplot as plt
-transformed = cv.warpPerspective(img1, H.numpy(), (h, w))
+transformed = cv.warpPerspective(img1, H.cpu().numpy(), (h, w))
 plt.imshow(transformed, 'gray'),plt.show()
 ```
 #### for full example you can read and use the [demo.ipynb](/demo.ipynb) notebook.
+## Times on tesla-t4 ours implemention vs cv2.find_homography
+| cv2.find_homography    | ours |
+| -------- | ------- |
+| 0.00531s  | **0.00350**    |
 ## On the implementation
 - To find the homography, the program selected random 4 sets of key-points, make homography, check the loss between all key-points, and select the best homography.
 
-- When every projects on numpy implements the homography by using SVD function, on torch implementation its work only when the 4 selection key-points has long distance, if it's short, the result will be very non deterministic.
-
-- for improve this, i implemented a version of *Gaussian elimination* and that's works good.
+- When every projects on numpy implements the homography by using SVD function, on torch implementation its work only when the 4 selection key-points has long distance, if it's short, the result will be very non deterministic, to improve this, i implemented a version of *Gaussian elimination* and that's works good.
 
 - I optimize the algorithm to using 10000 iterations and select the best homography that has maximum key-point that has *distance < 6*.
