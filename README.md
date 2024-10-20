@@ -3,10 +3,9 @@ Implementation of cv2.find_homography by RANSAC (RANdom SAmple Consensus) functi
 ###### on the algorithm: [RANSAC](https://en.wikipedia.org/wiki/Random_sample_consensus)
 
 ## How to run
-Take the too sets of matching points that every element in first set corresponding to same element in the second set,
-the sets need to be in shape of ```[batch_size],[xy|2]```.
+Takes two sets of matching points, So that every element in first set is corresponding to same element in the second set, this sets should be to be in shape of ```[batch_size],[xy|2]```.
 
-#### How to use:
+#### Example of use:
 ```python
 from pytorch_homography import find_homography
 # kpt1 - first set of key-points in shape of N,2
