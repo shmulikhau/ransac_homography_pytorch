@@ -26,9 +26,7 @@ plt.imshow(transformed, 'gray'),plt.show()
 | cv2.find_homography    | ours |
 | -------- | ------- |
 | 0.00531s  | **0.00350s**    |
-## On the implementation
-- To find the homography, the program selected random 4 sets of key-points, make homography, check the loss between all key-points, and select the best homography.
-
-- When every projects on numpy implements the homography by using SVD function, on torch implementation its work only when the 4 selection key-points has long distance, if it's short, the result will be very non deterministic, to improve this, i implemented a version of *Gaussian elimination* and that's works good.
-
-- I optimize the algorithm to using 10000 iterations and select the best homography that has maximum key-point that has *distance < 6*.
+## Implementation Overview
+- To compute the homography, the program randomly selects four sets of key points. It then calculates the homography and assesses the loss across all key points, ultimately selecting the best homography based on this evaluation.
+- In the NumPy implementation, homography is derived using the SVD function. However, in the Torch implementation, the algorithm performs effectively only when the selected key points are widely spaced. When the key points are close together, the results tend to be highly variable. To address this issue, I implemented a version of *Gaussian elimination*, which significantly improved the stability of the results.
+- I optimized the algorithm to run 10,000 iterations, selecting the best homography based on the maximum number of key points with *distances < 6*.
