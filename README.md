@@ -33,6 +33,8 @@ plt.imshow(transformed, 'gray'),plt.show()
         First, this is the homography:
         $ \begin{bmatrix} {h_1} & {h_2} & {h_3} \\ {h_4} & {h_5} & {h_6} \\ {h_7} & {h_8} & {h_9} \end{bmatrix} $,
 
+        $ \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix} $
+
         the key-point before transforming: $[x_1,y_1,1]$,
 
         the output after transforming: $[x_2,y_2]$.
