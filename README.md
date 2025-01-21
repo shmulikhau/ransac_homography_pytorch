@@ -31,7 +31,7 @@ plt.imshow(transformed, 'gray'),plt.show()
 - In the NumPy implementations, homography is derived using the SVD function. However, in the Torch implementation, the algorithm performs effectively only when the selected key points are widely spaced. When the key points are close together, the results tend to be highly variable. To address this issue, I implemented a version of *Gaussian elimination*, which significantly improved the stability of the results.
     - #### How it works:
         First, this is the homography:
-        $[\begin{array}{ccc}h_1 & h_2 & h_3 \\ h_4 & h_5 & h_6 \\ h_7 & h_8 & h_9\end{array}]$,
+        ![homography](./homography-matrix.png),
 
         the key-point before transforming: $[x_1,y_1,1]$,
 
@@ -39,8 +39,7 @@ plt.imshow(transformed, 'gray'),plt.show()
 
         The equation for $x_2$ is: 
         $\frac{h_1 \cdot x_1+ h_2 \cdot y_1+ h_3 \cdot 1}{h_7 \cdot x_1+ h_8 \cdot y_1+ h_9 \cdot 1} = x_2$,
-
-        and the equation for $y_2$ is:
+        and for $y_2$ is:
         $\frac{h_4\cdot x_1+h_5\cdot y_1+ h_6 \cdot 1}{h_7 \cdot x_1+ h_8 \cdot y_1+ h_9 \cdot 1} = y_2$.
 
         And this is equivalent of $x_2$ equation:
