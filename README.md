@@ -42,7 +42,7 @@ plt.imshow(transformed, 'gray'),plt.show()
         and for $y_2$ is:
         $\frac{h_4\cdot x_1+h_5\cdot y_1+ h_6 \cdot 1}{h_7 \cdot x_1+ h_8 \cdot y_1+ h_9 \cdot 1} = y_2$.
 
-        And this is equivalent of $x_2$ equation:
+        And this is equivalent to $x_2$ equation:
 
         $0 = \frac{h_1\cdot x_1+h_2\cdot y_1+h_3\cdot 1}{h_7\cdot x_1+h_8\cdot y_1+h_9\cdot 1}-x_2=h_4 x_1+h_5 y_1+h_6\cdot 1-x_2(h_7 x_1+h_8 y_1+h_9\cdot 1) = h_4 x_1+h_5 y_1+h_6\cdot 1-x_2 h_7 x_1-x_2 h_8 y_1-x_2 h_9\cdot 1=0$.
 
