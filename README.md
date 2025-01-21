@@ -39,8 +39,7 @@ plt.imshow(transformed, 'gray'),plt.show()
 
         The equation for $x_2$ is: 
         $\frac{h_1 \cdot x_1+ h_2 \cdot y_1+ h_3 \cdot 1}{h_7 \cdot x_1+ h_8 \cdot y_1+ h_9 \cdot 1} = x_2$,
-
-        and the equation for $y_2$ is:
+        and for $y_2$ is:
         $\frac{h_4\cdot x_1+h_5\cdot y_1+ h_6 \cdot 1}{h_7 \cdot x_1+ h_8 \cdot y_1+ h_9 \cdot 1} = y_2$.
 
         And this is equivalent of $x_2$ equation:
